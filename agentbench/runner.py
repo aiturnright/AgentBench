@@ -2,7 +2,7 @@
 
 import sys
 
-from agentbench.config import get_judge_api_key, get_model
+from agentbench.config import get_model
 from agentbench.evaluators.base import EvalResult
 from agentbench.evaluators.llm_judge import LLMJudge
 from agentbench.models.base import BaseModel
@@ -15,15 +15,16 @@ def run_benchmark(
     model_names: list[str],
     tasks_path: str,
     output_path: str = "results/output.json",
-    judge_model: str = "openai/gpt-5.2",
+    judge_model: str = "doubao",
 ) -> dict[str, list[EvalResult]]:
     """Run the full evaluation pipeline.
 
     Args:
-        model_names: List of model short names (e.g. ['openai', 'anthropic']).
+        model_names: List of model short names (e.g. ['doubao', 'tongyi']).
         tasks_path: Path to the benchmark JSON file.
         output_path: Where to save the JSON results.
-        judge_model: Model ID for the LLM judge.
+        judge_model: Model for the LLM judge. Can be:
+            - A registered model name (e.g. 'doubao', 'tongyi')
 
     Returns:
         Mapping of model name -> list of EvalResult.
@@ -33,7 +34,7 @@ def run_benchmark(
     print(f"Loaded {len(tasks)} tasks from {tasks_path}")
 
     # Initialize judge
-    judge = LLMJudge(model_id=judge_model, api_key=get_judge_api_key())
+    judge = LLMJudge(judge_model)
 
     # Initialize models
     models: list[BaseModel] = []

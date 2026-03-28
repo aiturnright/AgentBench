@@ -1,0 +1,18 @@
+{
+  "tasks": [
+    {
+      "id": "quick-task-1",
+      "domain": "general",
+      "capability": "definition",
+      "prompt": "请用一句话描述人工智能的定义。",
+      "criteria": "能够准确清晰地描述人工智能的基本概念，语言简洁易懂"
+    },
+    {
+      "id": "quick-task-2",
+      "domain": "programming",
+      "capability": "libraries",
+      "prompt": "请列出三个常用的 Python 数据分析库。",
+      "criteria": "能够准确列出三个常见的 Python 数据分析库，并简要说明其用途"
+    }
+  ]
+}

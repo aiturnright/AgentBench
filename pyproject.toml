@@ -17,6 +17,11 @@ dependencies = [
     "scipy>=1.10",
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agentbench*"]
+exclude = ["results*"]
+
 [project.scripts]
 agentbench = "run:main"
 agentbench-audio = "run_audio:main"

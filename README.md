@@ -64,27 +64,34 @@ OPENROUTER_API_KEY=sk-or-your-openrouter-api-key
 ### 运行评测
 
 ```bash
-# 使用 OpenAI 模型运行评测（默认）
+# 使用豆包模型运行评测（默认）
 python run.py
 
-# 同时评测 OpenAI 和 Anthropic 模型
-python run.py --models openai,anthropic
+# 运行指定国产模型
+python run.py --models doubao
+python run.py --models qwen
+python run.py --models doubao,qwen
+
+# 使用国产模型进行评估
+python run.py --models doubao --judge doubao
+python run.py --models qwen --judge qwen
+python run.py --models doubao --judge qwen
 
 # 指定任务集和输出路径
-python run.py --models openai,anthropic --tasks benchmarks/text_generation.json --output results/output.json
+python run.py --models doubao,qwen --tasks benchmarks/text_generation.json --output results/output.json
 
 # 指定 LLM 评审模型
-python run.py --models openai --judge openai/gpt-5.2
+python run.py --models doubao --judge doubao
 ```
 
 ### CLI 参数
 
 | 参数 | 默认值 | 说明 |
 |------|--------|------|
-| `--models` | `openai` | 逗号分隔的模型名称，可选：`openai`、`anthropic`、`google`、`deepseek` |
+| `--models` | `doubao` | 逗号分隔的模型名称，可选：`doubao`、`qwen` |
 | `--tasks` | `benchmarks/text_generation.json` | 基准测试 JSON 文件路径 |
 | `--output` | `results/output.json` | 结果输出 JSON 文件路径 |
-| `--judge` | `openai/gpt-5.2` | LLM 评审使用的模型 ID |
+| `--judge` | `doubao` | LLM 评审使用的模型，可以是已注册的模型名称（如 `doubao`、`qwen`），使用该模型的 API 进行评估 |
 
 ## ASMR 音频评测
 
@@ -177,12 +184,12 @@ python run_audio.py --models openai-tts,gemini-tts --tasks benchmarks/asmr_audio
 
 ## 支持的模型
 
-| 名称 | 模型 ID | 说明 |
-|------|---------|------|
-| `openai` | openai/gpt-5.2 | 通过 OpenRouter 调用 |
-| `anthropic` | anthropic/claude-sonnet-4.6 | 通过 OpenRouter 调用 |
-| `google` | google/gemini-2.5-flash | 通过 OpenRouter 调用 |
-| `deepseek` | deepseek/deepseek-v3.2 | 通过 OpenRouter 调用 |
+### 国产模型
+
+| 名称 | 模型 ID | 说明 | API Key 环境变量 |
+|------|---------|------|------------------|
+| `doubao` | doubao-seed-2-0-pro-260215 | 字节跳动豆包 Seed 2.0 Pro | DOUBAO_API_KEY |
+| `qwen` | qwen-turbo | 阿里通义千问 Turbo (Qwen) | QWEN_API_KEY |
 
 ## 基准测试集
 

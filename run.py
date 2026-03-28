@@ -29,7 +29,7 @@ def main():
         "--judge",
         type=str,
         default="openai/gpt-5.2",
-        help="Model ID for the LLM judge (OpenRouter format, e.g. openai/gpt-5.2)",
+        help="Model for the LLM judge. Can be: 1) OpenAI format model ID (e.g. openai/gpt-5.2), requires OPENROUTER_API_KEY; 2) Registered model name (e.g. doubao, wenxin), uses that model's API for evaluation",
     )
 
     args = parser.parse_args()
